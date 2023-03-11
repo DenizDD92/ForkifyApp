@@ -8,9 +8,13 @@ export default class ViewClass {
   // **********************************************************
 
   render(data) {
+    if (!data || (Array.isArray(data) && !data.length))
+      return this.renderError();
+    // If the data is existing, if its array and empty array
     this._data = data;
     const markupHTML = this._generateMarkUp();
     this._clear();
+
     this._parentElement.insertAdjacentHTML("afterbegin", markupHTML);
   }
 
@@ -32,7 +36,7 @@ export default class ViewClass {
   }
 
   // **********************************************************
-  // *Method                 Render Success                     *
+  // *Method                 Render Success                   *
   // **********************************************************
   renderMessage(message = this._message) {
     const markupHTML = `<div class="message">
@@ -61,10 +65,6 @@ export default class ViewClass {
     this._parentElement.innerHTML = "";
     this._parentElement.insertAdjacentHTML("afterbegin", markupHTML);
   }
-
-  // **********************************************************
-  // *Method                 Render handler                   *
-  // **********************************************************
 
   // **********************************************************
   // *Method                 Clearing inner html              *

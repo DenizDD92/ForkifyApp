@@ -3,8 +3,12 @@ class SearchView {
 
   getQuery() {
     const query = this._parentElement.querySelector(".search__field").value;
+    if (!query) {
+      alert("Enter product or recipe name");
+      return;
+    }
     this._clearInput();
-    console.log(query);
+    console.log(query, "query");
     return query;
   }
 
